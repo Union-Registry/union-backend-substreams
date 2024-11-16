@@ -1,0 +1,172 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package contract.v1;
+message Events {
+    repeated Unionbackend_Initialized unionbackend_initializeds = 1;
+    repeated Unionbackend_OwnershipTransferred unionbackend_ownership_transferreds = 2;
+    repeated Unionbackend_UnionAccepted unionbackend_union_accepteds = 3;
+    repeated Unionbackend_UnionProposed unionbackend_union_proposeds = 4;
+    repeated Unionbackend_UnionRevoked unionbackend_union_revokeds = 5;
+}
+message Calls {
+    repeated Unionbackend_AcceptUnionCall unionbackend_call_accept_unions = 1;
+    repeated Unionbackend_InitializeCall unionbackend_call_initializes = 2;
+    repeated Unionbackend_OnErc1155BatchReceivedCall unionbackend_call_on_erc1155_batch_receiveds = 3;
+    repeated Unionbackend_OnErc1155ReceivedCall unionbackend_call_on_erc1155_receiveds = 4;
+    repeated Unionbackend_ProposeUnionCall unionbackend_call_propose_unions = 5;
+    repeated Unionbackend_RenounceOwnershipCall unionbackend_call_renounce_ownerships = 6;
+    repeated Unionbackend_RevokeUnionCall unionbackend_call_revoke_unions = 7;
+    repeated Unionbackend_SetRingsContractCall unionbackend_call_set_rings_contracts = 8;
+    repeated Unionbackend_SetSchemaCall unionbackend_call_set_schemas = 9;
+    repeated Unionbackend_SetSpContractCall unionbackend_call_set_sp_contracts = 10;
+    repeated Unionbackend_TransferOwnershipCall unionbackend_call_transfer_ownerships = 11;
+}
+message EventsCalls {
+    Events events = 1;
+    Calls calls = 2;
+}
+message Unionbackend_Initialized {
+    string evt_tx_hash = 1;
+    uint32 evt_index = 2;
+    google.protobuf.Timestamp evt_block_time = 3;
+    uint64 evt_block_number = 4;
+    uint64 version = 5;
+}
+message Unionbackend_OwnershipTransferred {
+    string evt_tx_hash = 1;
+    uint32 evt_index = 2;
+    google.protobuf.Timestamp evt_block_time = 3;
+    uint64 evt_block_number = 4;
+    bytes previous_owner = 5;
+    bytes new_owner = 6;
+}
+message Unionbackend_UnionAccepted {
+    string evt_tx_hash = 1;
+    uint32 evt_index = 2;
+    google.protobuf.Timestamp evt_block_time = 3;
+    uint64 evt_block_number = 4;
+    string union_id = 5;
+    uint64 attestation_uid = 6;
+}
+message Unionbackend_UnionProposed {
+    string evt_tx_hash = 1;
+    uint32 evt_index = 2;
+    google.protobuf.Timestamp evt_block_time = 3;
+    uint64 evt_block_number = 4;
+    string union_id = 5;
+}
+message Unionbackend_UnionRevoked {
+    string evt_tx_hash = 1;
+    uint32 evt_index = 2;
+    google.protobuf.Timestamp evt_block_time = 3;
+    uint64 evt_block_number = 4;
+    string union_id = 5;
+}
+  
+message Unionbackend_AcceptUnionCall {
+    string call_tx_hash = 1;
+    google.protobuf.Timestamp call_block_time = 2;
+    uint64 call_block_number = 3;
+    uint64 call_ordinal = 4;
+    bool call_success = 5;
+    string union_id = 6;
+    string token_id = 7;
+    string vow = 8;
+    string secret = 9;
+}
+message Unionbackend_InitializeCall {
+    string call_tx_hash = 1;
+    google.protobuf.Timestamp call_block_time = 2;
+    uint64 call_block_number = 3;
+    uint64 call_ordinal = 4;
+    bool call_success = 5;
+    bytes u_rings_contract = 6;
+    uint64 u_schema = 7;
+    bytes u_sp_instance_address = 8;
+}
+message Unionbackend_OnErc1155BatchReceivedCall {
+    string call_tx_hash = 1;
+    google.protobuf.Timestamp call_block_time = 2;
+    uint64 call_block_number = 3;
+    uint64 call_ordinal = 4;
+    bool call_success = 5;
+    bytes param0 = 6;
+    bytes param1 = 7;
+    repeated string param2 = 8;
+    repeated string param3 = 9;
+    bytes param4 = 10;
+    bytes output_param0 = 11;
+}
+message Unionbackend_OnErc1155ReceivedCall {
+    string call_tx_hash = 1;
+    google.protobuf.Timestamp call_block_time = 2;
+    uint64 call_block_number = 3;
+    uint64 call_ordinal = 4;
+    bool call_success = 5;
+    bytes param0 = 6;
+    bytes param1 = 7;
+    string param2 = 8;
+    string param3 = 9;
+    bytes param4 = 10;
+    bytes output_param0 = 11;
+}
+message Unionbackend_ProposeUnionCall {
+    string call_tx_hash = 1;
+    google.protobuf.Timestamp call_block_time = 2;
+    uint64 call_block_number = 3;
+    uint64 call_ordinal = 4;
+    bool call_success = 5;
+    string token_id = 6;
+    string vow = 7;
+    bytes secret_hash = 8;
+}
+message Unionbackend_RenounceOwnershipCall {
+    string call_tx_hash = 1;
+    google.protobuf.Timestamp call_block_time = 2;
+    uint64 call_block_number = 3;
+    uint64 call_ordinal = 4;
+    bool call_success = 5;
+}
+message Unionbackend_RevokeUnionCall {
+    string call_tx_hash = 1;
+    google.protobuf.Timestamp call_block_time = 2;
+    uint64 call_block_number = 3;
+    uint64 call_ordinal = 4;
+    bool call_success = 5;
+    string union_id = 6;
+    string reason = 7;
+}
+message Unionbackend_SetRingsContractCall {
+    string call_tx_hash = 1;
+    google.protobuf.Timestamp call_block_time = 2;
+    uint64 call_block_number = 3;
+    uint64 call_ordinal = 4;
+    bool call_success = 5;
+    bytes u_rings_contract = 6;
+}
+message Unionbackend_SetSchemaCall {
+    string call_tx_hash = 1;
+    google.protobuf.Timestamp call_block_time = 2;
+    uint64 call_block_number = 3;
+    uint64 call_ordinal = 4;
+    bool call_success = 5;
+    uint64 u_schema = 6;
+}
+message Unionbackend_SetSpContractCall {
+    string call_tx_hash = 1;
+    google.protobuf.Timestamp call_block_time = 2;
+    uint64 call_block_number = 3;
+    uint64 call_ordinal = 4;
+    bool call_success = 5;
+    bytes u_sp_instance_address = 6;
+}
+message Unionbackend_TransferOwnershipCall {
+    string call_tx_hash = 1;
+    google.protobuf.Timestamp call_block_time = 2;
+    uint64 call_block_number = 3;
+    uint64 call_ordinal = 4;
+    bool call_success = 5;
+    bytes new_owner = 6;
+}
